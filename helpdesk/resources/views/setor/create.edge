@@ -9,7 +9,7 @@
         @endif
         </legend>
         <hr>
-        <form action="{{ route('SetorController.store') }}" method="POST" id="form">
+        <form action="{{ route('setorController.store') }}" method="POST" id="form">
             {{ csrfField() }}
             <div class="form-group">
                 <label for="nome">Name</label>
@@ -44,7 +44,7 @@
         $("[name='nome']").val('{{setor.nome}}')
         $("[name='descricao']").val('{{setor.descricao}}')
         $("[name='centro']").val('{{setor.centro}}')
-        $('#form').attr('action', "{{ route('SetorController.update', {id: setor.id}) }}?_method=PUT")
+        $('#form').attr('action', "{{ route('setorController.update', {id: setor.id}) }}?_method=PUT")
     </script>
 @endif
 @endsection

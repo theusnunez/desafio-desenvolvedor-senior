@@ -12,7 +12,7 @@ const Chamado = use('App/Models/Chamado')
 const Problema = use('App/Models/Problema')
 const Area = use('App/Models/Area')
 const Predio = use('App/Models/Predio')
-const Setor = use('App/Models/Setor')
+const setor = use('App/Models/Setor')
 const Status = use('App/Models/Status')
 const Ocorrencia = use('App/Models/Ocorrencia')
 const Usuario = use('App/Models/Usuario')
@@ -39,7 +39,7 @@ class ChamadoController {
     let problemas = await Problema.all()
     let areas = await Area.all()
     const predios = await Predio.all()
-    const setores = await Setor.all()
+    const setores = await setor.all()
 
     let usuarios = {}
     if (request.user.funcao !== 'M') {
@@ -124,7 +124,7 @@ class ChamadoController {
     // const status = await Status.all()
     // obtendo os demais dados do banco
     const predios = await Predio.all()
-    const setores = await Setor.all()
+    const setores = await setor.all()
 
     let problemas = await Problema.all()
     let areas = await Area.all()

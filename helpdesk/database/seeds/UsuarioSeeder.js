@@ -12,6 +12,7 @@
 
 const Factory = use('Factory')
 const Database = use('Database')
+const bcrypt = require('bcryptjs');
 
 class UsuarioSeeder {
   async run () {
@@ -19,10 +20,11 @@ class UsuarioSeeder {
       .table('usuarios')
       .insert({
         id: 1,
-        created_at: '2018-05-01 00:00:00',
-        updated_at: '2018-05-01 00:00:00',
+        created_at: new Date(),
+        updated_at: new Date(),
         nome: 'Master Administrator',
         login: 'admin',
+        senha: bcrypt.hashSync('admin'),
         email: 'administrator@mirana.fake',
         funcao: 'A',
         ramal: '1111',
@@ -37,6 +39,7 @@ class UsuarioSeeder {
         updated_at: '2018-05-01 00:00:01',
         nome: 'Efficient Operator',
         login: 'operator',
+        senha: bcrypt.hashSync('operator'),
         email: 'operator@mirana.fake',
         funcao: 'O',
         ramal: '2222',
@@ -51,6 +54,7 @@ class UsuarioSeeder {
         updated_at: '2018-05-01 00:00:02',
         nome: 'Common User',
         login: 'user',
+        senha: bcrypt.hashSync('user'),
         email: 'user@mirana.fake',
         funcao: 'M',
         ramal: '3333',

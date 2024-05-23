@@ -19,8 +19,8 @@ class StatusSeeder {
       .table('statuses')
       .insert({
         id: 1,
-        created_at: '2018-05-01 00:00:00',
-        updated_at: '2018-05-01 00:00:00',
+        created_at: new Date(),
+        updated_at: new Date(),
         nome: 'Waiting',
         habilitado: '1',
         habilitadoOperador: '1'

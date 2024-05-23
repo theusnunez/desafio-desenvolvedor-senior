@@ -25,6 +25,9 @@ Route.get('/logout', 'LoginController.logout').as('logout');
 // home route (same as /chamados)
 Route.get('/home', 'ChamadoController.index').middleware('sessionVerify');
 
+//Chat Route
+Route.get('/chat', 'ChamadoController.index').middleware('sessionVerify');
+
 // options routes
 Route.get('/opcoes', 'OpcoesController.index').middleware('sessionVerify').as('opcoes');
 Route.post('/opcoes', 'OpcoesController.update').middleware('sessionVerify').as('opcoes');
@@ -43,6 +46,8 @@ Route
     [['areas.store', 'areas.update'], ['ValidatorArea']]
   ]))
 
+  Route.get('areas/create', 'AreaController.create')
+
 Route
   .resource('problemas', 'ProblemaController')
   .except(['show'])
@@ -51,13 +56,17 @@ Route
     [['problemas.store', 'problemas.update'], ['ValidatorProblema']]
   ]))
 
+  Route.get('/problemas/create', 'ProblemaController.create')
+
 Route
-  .resource('setores', 'SetorController')
+  .resource('setores', 'setorController')
   .except(['show'])
   .middleware('sessionVerify:A')
   .validator(new Map([
-    [['setores.store', 'setores.update'], ['ValidatorSetor']]
+    [['setores.store', 'setores.update'], ['Validatorsetor']]
   ]))
+
+  Route.get('setores/create', 'setorController.create')
 
 Route
   .resource('predios', 'PredioController')
@@ -66,6 +75,8 @@ Route
   .validator(new Map([
     [['predios.store', 'predios.update'], ['ValidatorPredio']]
   ]))
+
+  Route.get('/predios/create', 'PredioController.create')
 
 Route
   .resource('status', 'StatusController')

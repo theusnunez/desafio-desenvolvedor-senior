@@ -2,7 +2,7 @@
 
 const Model = use('Model')
 
-class Setor extends Model {
+class setor extends Model {
 }
 
-module.exports = Setor
+module.exports = setor

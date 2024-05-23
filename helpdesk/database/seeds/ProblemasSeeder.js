@@ -2,7 +2,7 @@
 
 /*
 |--------------------------------------------------------------------------
-| AreaSeeder
+| ProblemasSeeder
 |--------------------------------------------------------------------------
 |
 | Make use of the Factory instance to seed database with dummy data or
@@ -13,28 +13,32 @@
 const Factory = use('Factory')
 const Database = use('Database')
 
-class AreaSeeder {
+class ProblemasSeeder {
   async run () {
     await Database
-      .table('areas')
+      .table('problemas')
       .insert({
         id: 1,
         created_at: new Date(),
         updated_at: new Date(),
-        nome: 'Network',
-        descricao: 'network area'
+        nome: 'Network - Cable',
+        area_id: '1',
+        sla: '1',
+        prioridade: '1'
       })
 
     await Database
-      .table('areas')
+      .table('problemas')
       .insert({
         id: 2,
         created_at: new Date(),
         updated_at: new Date(),
-        nome: 'Systemas',
-        descricao: 'systems area'
+        nome: 'Sistemas Lentidao',
+        area_id: '2',
+        sla: '1',
+        prioridade: '1'
       })
   }
 }
 
-module.exports = AreaSeeder
+module.exports = ProblemasSeeder

@@ -1,11 +1,11 @@
 'use strict'
 
-const Setor = use('App/Models/Setor')
+const setor = use('App/Models/setor')
 
-class SetorController {
+class setorController {
   async index ({ request, view }) {
     if (request.ajax()) {
-      return await Setor.all()
+      return await setor.all()
     } else {
       return view.render('setor.index')
     }
@@ -16,19 +16,19 @@ class SetorController {
   }
 
   async store ({ request, response, session }) {
-    const SetorData = request.except('_csrf')
-    await Setor.create(SetorData)
+    const setorData = request.except('_csrf')
+    await setor.create(setorData)
     session.flash({ notification: 'Department created with success', type: 'success' })
     response.redirect('/setores')
   }
 
   async edit ({ response, view, params }) {
-    const setor = await Setor.find(params.id)
+    const setor = await setor.find(params.id)
     return view.render('setor.create', { setor })
   }
 
   async update ({ request, response, session, params }) {
-    const setor = await Setor.find(params.id)
+    const setor = await setor.find(params.id)
 
     if (setor) {
       const setorData = request.except('_csrf')
@@ -47,7 +47,7 @@ class SetorController {
   }
 
   async destroy ({ request, response, params }) {
-    const setor = await Setor.find(params.id)
+    const setor = await setor.find(params.id)
     if (setor) {
       try {
         await setor.delete()
@@ -60,4 +60,4 @@ class SetorController {
   }
 }
 
-module.exports = SetorController
+module.exports = setorController

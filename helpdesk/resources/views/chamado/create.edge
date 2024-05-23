@@ -24,9 +24,9 @@
                 <select required name="problema_id" class="form-select" data-live-search="true" title="Select"
                   data-style="mySelectPicker">
                   @each(area in areas)
-                  <optgroup label="{{area.nome}}">
+                  <optgroup selected="selected" label="{{area.nome}}">
                     @each(problema in area.problemas)
-                    <option data-dica="{{problema.dica}}" value="{{problema.id}}">{{problema.nome}}</option>
+                    <option data-dica="{{problema.dica}}" value="{{problema.id}}" selected="selected">{{problema.nome}}</option>
                     @endeach
                   </optgroup>
                   @endeach
@@ -104,7 +104,7 @@
 
 
           <div class="col-md-4">
-            <label for="patrimonio" class="form-label">Equipmamento (optional)</label>
+            <label for="patrimonio" class="form-label">Equipamento (optional)</label>
             <input type="number" value="{{ old('patrimonio', '') }}" name="patrimonio"
               class="form-control">
              {{--  elIf('<span class="text-danger">$self</span>', getErrorFor('patrimonio'), hasErrorFor('patrimonio')) --}}

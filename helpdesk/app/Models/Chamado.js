@@ -13,7 +13,7 @@ class Chamado extends Model {
   problema () { return this.belongsTo('App/Models/Problema') }
   status () { return this.belongsTo('App/Models/Status') }
   usuario () { return this.belongsTo('App/Models/Usuario') }
-  setor () { return this.belongsTo('App/Models/Setor') }
+  setor () { return this.belongsTo('App/Models/setor') }
   ocorrencias () { return this.hasMany('App/Models/Ocorrencia') }
   predio () { return this.belongsTo('App/Models/Predio') }
 

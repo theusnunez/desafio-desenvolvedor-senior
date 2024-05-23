@@ -1,6 +1,6 @@
 'use strict'
 
-class ValidatorSetor {
+class Validatorsetor {
   get rules () {
     return {
       nome: 'required',
@@ -23,4 +23,4 @@ class ValidatorSetor {
   }
 }
 
-module.exports = ValidatorSetor
+module.exports = Validatorsetor

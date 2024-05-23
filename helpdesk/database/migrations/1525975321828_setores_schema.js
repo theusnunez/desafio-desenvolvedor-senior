@@ -2,7 +2,7 @@
 
 const Schema = use('Schema')
 
-class SetoresSchema extends Schema {
+class setoresSchema extends Schema {
   up () {
     this.create('setors', (table) => {
       table.increments()
@@ -18,4 +18,4 @@ class SetoresSchema extends Schema {
   }
 }
 
-module.exports = SetoresSchema
+module.exports = setoresSchema
