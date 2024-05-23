@@ -25,12 +25,12 @@ Route.get('/logout', 'LoginController.logout').as('logout');
 // home route (same as /chamados)
 Route.get('/home', 'ChamadoController.index').middleware('sessionVerify');
 
-//Chat Route
-Route.get('/chat', 'ChamadoController.index').middleware('sessionVerify');
-
 // options routes
 Route.get('/opcoes', 'OpcoesController.index').middleware('sessionVerify').as('opcoes');
 Route.post('/opcoes', 'OpcoesController.update').middleware('sessionVerify').as('opcoes');
+
+//Chat Route
+Route.get('/chat', 'ChamadoController.index').middleware('sessionVerify');
 
 //Rotas API
 

@@ -8,7 +8,7 @@ const bcrypt = require('bcryptjs');
 class LoginController {
   index ({ session, response, view })  {
     if (session.get('user')) {
-      return response.redirect('/');
+      return response.redirect('/home');
     }
     return view.render('login.signin');
   }
