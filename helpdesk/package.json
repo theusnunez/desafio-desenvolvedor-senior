@@ -4,7 +4,7 @@
   "description": "A sample helpdesk app",
   "main": "index.js",
   "scripts": {
-    "preinstall": "sudo npm install vite pm2 -g && pm2 install pm2-logrotate",
+    "preinstall": "npm install vite pm2 -g && pm2 install pm2-logrotate",
     "start": "pm2 startOrReload ecosystem.config.js && pm2 logs all",
     "test": "node ace test",
     "dev": "nodemon --watch app --watch bootstrap --watch config --watch .env -x node --inspect server.js"
