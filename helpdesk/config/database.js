@@ -62,12 +62,12 @@ module.exports = {
   pg: {
     client: 'pg',
     connection: {
-      host: Env.get('PGS_HOST', 'adonis-it-168f.g.aivencloud.com'),
-      port: Env.get('PGS_PORT', '11995'),
-      user: Env.get('PGS_USER', 'avnadmin'),
-      password: Env.get('PGS_PASSWORD', 'AVNS_fQKoM4C6EDah--V-_qM'),
-      database: Env.get('PGS_DB', 'defaultdb')
+      host: Env.get('DB_HOST', 'localhost'),
+      port: Env.get('DB_PORT', 5432),
+      user: Env.get('DB_USER', 'postgres'),
+      password: Env.get('DB_PASSWORD', 'postgres'),
+      database: Env.get('DB_DATABASE', 'helpdesk')
     }
-    // connection: 'postgres://avnadmin:AVNS_fQKoM4C6EDah--V-_qM@adonis-it-168f.g.aivencloud.com:11995/defaultdb?sslmode=require'
+    // connection: 'postgres://user:password@host:port/database?sslmode=require'
   }
 }

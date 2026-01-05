@@ -36,6 +36,11 @@ Route.get('/chat', 'ChamadoController.index').middleware('sessionVerify');
 
 Route.get('/api/chamados', 'ChamadoController.api_todos');
 
+// Health check for container health
+Route.get('/health', () => {
+  return { status: 'ok', uptime: process.uptime() }
+});
+
 //Rotas API Chamado
 
 Route

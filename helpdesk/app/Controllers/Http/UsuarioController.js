@@ -45,7 +45,10 @@ class UsuarioController {
     if (usuario) {
       usuario.nome = request.input('nome')
       usuario.login = request.input('login')
-      usuario.senha = request.input('senha')
+      const novaSenha = request.input('senha')
+      if (novaSenha) {
+        usuario.senha = await bcrypt.hash(novaSenha, 10)
+      }
       usuario.email = request.input('email')
       usuario.funcao = request.input('funcao')
 
@@ -68,10 +71,10 @@ class UsuarioController {
         await usuario.delete()
         return response.send('User deleted with success!')
       } catch (error) {
-        return response.usuario(409).send('Cannot delete this user because it is already in use')
+        return response.status(409).send('Cannot delete this user because it is already in use')
       }
     }
-    return response.usuario(404).send('Cannot find the user to be deleted!')
+    return response.status(404).send('Cannot find the user to be deleted!')
   }
 }
 

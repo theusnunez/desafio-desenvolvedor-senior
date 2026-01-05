@@ -3,8 +3,8 @@
 class ValidatorUsuario {
   get rules () {
     return {
-      nome: 'required|accepted',
-      login: 'required|accepted|includes:.',
+      nome: 'required|string|min:3',
+      login: 'required|alpha_numeric|unique:usuarios,login',
       email: 'required|email',
       funcao: 'required|in:A,O,M'
     }
@@ -13,10 +13,14 @@ class ValidatorUsuario {
   get messages () {
     return {
       'nome.required': 'The name field is required',
-      'login.required': 'The name field is required and need to follow the pattern name.surname',
-      'login.includes': 'The name field is required and need to follow the pattern name.surname',
+      'nome.min': 'The name must have at least 3 characters',
+      'login.required': 'The login field is required and should follow name.surname',
+      'login.alpha_numeric': 'The login may contain only letters and numbers',
+      'login.unique': 'This login is already in use',
       'email.required': 'The email field is required',
-      'funcao.required': 'The role field is required'
+      'email.email': 'The email field must be a valid email address',
+      'funcao.required': 'The role field is required',
+      'funcao.in': 'Invalid role'
     }
   }
 

@@ -33,7 +33,8 @@ Serão considerados diferenciais o desenvolvimento de testes unitários e de int
 - Abra a pasta do projeto com o terminal de comando de sua preferencia;
 - Execute os seguintes comandos na ordem abaixo:
 - - 'cd helpdesk';
-- - 'node install';
+- - 'npm install';
+- - 'npm run setup' (optional: installs dev tooling and hooks);
 - - 'adonis serve --dev';
 
 Após este processo, o sistema estará rodando no caminho http://localhost:3333.

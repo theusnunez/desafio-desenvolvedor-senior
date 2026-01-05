@@ -4,14 +4,20 @@
   "description": "A sample helpdesk app",
   "main": "index.js",
   "scripts": {
-    "preinstall": "npm install vite pm2 -g && pm2 install pm2-logrotate",
     "start": "pm2 startOrReload ecosystem.config.js && pm2 logs all",
+    "start:prod": "node server.js",
     "test": "node ace test",
-    "dev": "nodemon --watch app --watch bootstrap --watch config --watch .env -x node --inspect server.js"
+    "dev": "nodemon --watch app --watch bootstrap --watch config --watch .env -x node --inspect server.js",
+    "lint": "eslint \"**/*.js\" --ignore-path .gitignore",
+    "format": "prettier --write \"**/*.{js,json,md}\"",
+    "setup": "npm install"
   },
   "author": "Felipe Secato",
   "license": "UNLICENSED",
   "private": true,
+  "engines": {
+    "node": ">=14"
+  },
   "dependencies": {
     "@adonisjs/ace": "^5.0.1",
     "@adonisjs/auth": "^3.0.5",
@@ -38,6 +44,18 @@
   },
   "devDependencies": {
     "nodemon": "*",
-    "sqlite3": "*"
+    "sqlite3": "*",
+    "eslint": "^8.45.0",
+    "prettier": "^2.8.8",
+    "husky": "^8.0.0",
+    "lint-staged": "^14.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": ["eslint --fix", "prettier --write", "git add"]
   }
 }

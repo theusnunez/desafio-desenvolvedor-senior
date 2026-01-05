@@ -4,8 +4,8 @@ class ValidatorChamado {
   get rules () {
     return {
       descricao: 'required',
-      patrimonio: 'min:6|max:6',
-      ramal: 'required|min:4|max:4',
+      patrimonio: 'size:6',
+      ramal: 'required|size:4',
       status_id: 'required',
       problema_id: 'required',
       predio_id: 'required',
@@ -17,6 +17,8 @@ class ValidatorChamado {
     return {
       'descricao.required': 'The description field is required',
       'ramal.required': 'The phone field is required',
+      'ramal.size': 'The ramal must be 4 characters',
+      'patrimonio.size': 'The patrimonio must be 6 characters',
       'status_id.required': 'The status field is required',
       'problema_id.required': 'The problem field is required',
       'predio_id.required': 'The building field is required',

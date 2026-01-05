@@ -73,18 +73,25 @@ class ChamadoController {
 
     if (request.file('anexo')) {
       const anexo = request.file('anexo', {
-        size: '2mb'
+        size: '2mb',
+        extnames: ['jpg', 'jpeg', 'png', 'pdf']
       })
 
-      const path = `${new Date().getTime()}.${anexo.subtype}`
+      if (!anexo) {
+        session.flash({ notification: 'Invalid attachment', type: 'error' })
+        return response.redirect('back')
+      }
+
+      const filename = `${new Date().getTime()}.${anexo.subtype}`
       await anexo.move(Helpers.publicPath('uploads'), {
-        name: path
+        name: filename
       })
 
       if (!anexo.moved()) {
-        return anexo.error()
+        session.flash({ notification: anexo.error().message || 'Upload failed', type: 'error' })
+        return response.redirect('back')
       }
-      chamadoData.anexo = path
+      chamadoData.anexo = filename
     }
 
     await Chamado.create(chamadoData)
@@ -186,29 +193,35 @@ class ChamadoController {
       // verificando se foi enviado arquivo em anexo
       if (request.file('anexo')) {
         const anexo = request.file('anexo', {
-          size: '2mb'
+          size: '2mb',
+          extnames: ['jpg', 'jpeg', 'png', 'pdf']
         })
 
-        const path = `${new Date().getTime()}.${anexo.subtype}`
+        const filename = `${new Date().getTime()}.${anexo.subtype}`
         await anexo.move(Helpers.publicPath('uploads'), {
-          name: path
+          name: filename
         })
 
         if (!anexo.moved()) {
-          return anexo.error()
+          session.flash({ notification: anexo.error().message || 'Upload failed', type: 'error' })
+          return response.redirect('back')
         }
 
-        // se ja exisita um anexo previamente, deleto
+        // se ja existia um anexo previamente, deleto
         if (chamado.anexo) {
-          const path = Helpers.publicPath('uploads') + '/' + chamado.anexo
-          await Drive.delete(path)
+          const filePath = Helpers.publicPath('uploads') + '/' + chamado.anexo
+          try {
+            await Drive.delete(filePath)
+          } catch (err) {
+            // ignore delete errors, keep processing
+          }
           ocorrencias += 'Anexo alterado. \n'
         } else {
           ocorrencias += 'Anexo inserido. \n'
         }
 
         // atualizo o caminho do anexo
-        chamado.anexo = path
+        chamado.anexo = filename
       }
 
       // so vai salvar algo novo se realmente tiver alguma alteração
@@ -340,23 +353,24 @@ class ChamadoController {
   }
 
   //API Chamaos
-  async api_todos(req, res) {
-    let chamados = Chamado.query()
-      .with('problema')
-      .with('usuario')
-      .with('status')
-      .with('setor')
-      .with('predio')
-      .with('ocorrencias.usuario');
+  async api_todos({ response }) {
+    try {
+      let chamados = await Chamado.query()
+        .with('problema')
+        .with('usuario')
+        .with('status')
+        .with('setor')
+        .with('predio')
+        .with('ocorrencias.usuario')
+        .fetch()
 
-    chamados = await chamados.fetch()
-    chamados = chamados.toJSON()
-    if (chamados) {
-      // res.status(200).json(chamados);
-      return ({chamados})
-    } else {
-      //res.status(400).send("Nenhum chamado");
-      return res.json({Erro: N/A})
+      chamados = chamados.toJSON()
+      if (chamados && chamados.length) {
+        return response.json(chamados)
+      }
+      return response.status(404).json({ error: 'Nenhum chamado' })
+    } catch (error) {
+      return response.status(500).json({ error: 'Internal server error' })
     }
   }
 

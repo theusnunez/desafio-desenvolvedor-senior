@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  app:
+    command: sh -c "chmod +x ./scripts/wait-for-postgres.sh && ./scripts/wait-for-postgres.sh db 5432 npm run dev"
+    environment:
+      NODE_ENV: development
+      MIGRATE: "false"
+      SEED: "false"
+    volumes:
+      - ./:/usr/src/app
+      - /usr/src/app/node_modules
+    ports:
+      - "3333:3333"
